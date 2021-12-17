@@ -27,6 +27,7 @@ def get_only_games(all_data, games):
     game_only = re.compile(r'^[1-9]')
     for line in all_data:
         if re.match(game_only, line):
+            line += '\n'
             games.append(line)
 
 
@@ -41,14 +42,30 @@ def write_games(filename, games):
         log.info('File written')
 
 
+def get_italy(all_data, italians):
+    italys = re.compile(r'^1\.\s?e4\se5\s2\.\s?Nf3\sNc6\s3\.\s?Bc4')
+    for i, line in enumerate(all_data):
+        if re.match(italys, line):
+            j = i
+            while True:
+                if all_data[j].startswith('['):
+                    break
+                italians.append(all_data[j])
+                j += 1
+            italians.append('\n')
+
+
 def main():
     """main function"""
-    chess_pgns = get_chess_games('ex_games.pgn')
+    chess_pgns = get_chess_games('blackburne.pgn')
     chess_games = []
     strip_newlines(chess_pgns, chess_games)
-    only_games = []
-    get_only_games(chess_games, only_games)
-    write_games('justgames.pgn', only_games)
+    italy = []
+    get_italy(chess_games, italy)
+    # only_games = []
+    # get_only_games(chess_games, only_games)
+    # write_games('blackburnes.pgn', only_games)
+    write_games('italians.pgn', italy)
 
 
 if __name__ == '__main__':
