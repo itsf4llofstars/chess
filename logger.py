@@ -4,8 +4,8 @@ import os
 import logging
 
 level = logging.DEBUG
-fmt = "[%(levelname)s %(asctime)s - %(message)s]"
-logging.basicConfig(level=level, format=fmt)
+fmt = "[%(levelname)s %(asctime)s - %(message)s - %(module)s %(funcName)s %(lineno)d]"
+logging.basicConfig(filename='chess.log', level=level, format=fmt)
 
 
 def debug(text: str = 'DEBUG'):
@@ -32,7 +32,7 @@ def main():
     info("main")
     debug()
     info()
-    error()
+    error("An error occured")
     warning()
     critical()
 
