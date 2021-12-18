@@ -4,7 +4,7 @@ import os
 import logging
 
 level = logging.DEBUG
-fmt = "[%(levelname)s %(asctime)s - %(message)s - %(module)s %(funcName)s %(lineno)d]"
+fmt = "[%(levelname)s %(asctime)s - %(message)s]"
 logging.basicConfig(filename='chess.log', level=level, format=fmt)
 
 
