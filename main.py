@@ -16,8 +16,9 @@ def get_chess_games(filename):
     except Exception as e:
         log.error(f'UNK: {e}')
     else:
-        log.info('File Parsed')
         return chess_games
+    finally:
+        log.info('get_chess_games() called')
 
 
 def strip_newlines(lines, new_lines):
@@ -38,23 +39,29 @@ def write_games(filename, games):
         with open(filename, 'w') as write:
             for line in games:
                 write.write(line)
+                write.write(' ')
     except Exception as e:
         log.error(f'UNK: {e}')
-    else:
-        log.info('File written')
+    finally:
+        log.info('write_games() called')
 
 
 def get_italy(all_data, italians):
-    italys = re.compile(r'^1\.\s?e4\se5\s2\.\s?Nf3\sNc6\s3\.\s?Bc4')
-    # italys = re.compile(r'^1\.e4\se5')
+    #: The Italian opening
+    # the_italian = re.compile(r'^1\.\s?e4\se5\s2\.\s?Nf3\sNc6\s3\.\s?Bc4')
+
+    #: The Italian without 3... Bc5, The Evan's Gameit
+    the_italian = re.compile(r'^1\.\s?e4\se5\s2\.\s?Nf3\sNc6\s3\.\s?Bc4\s[a-h]?[B-R]?[^c5]?\d')
+
     for i, line in enumerate(all_data):
-        if re.match(italys, line):
+        if re.match(the_italian, line):
             j = i
             while j < len(all_data):
                 if all_data[j].startswith('['):
                     break
                 italians.append(all_data[j])
                 j += 1
+
             italians.append('\n')
 
 
@@ -80,6 +87,7 @@ def main():
 
     new_filename = input('Enter the name of the file to save to: ')
     write_games(new_filename, italy)
+    log.info('Script completed')
 
 
 if __name__ == '__main__':
