@@ -7,4 +7,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    from os import system
+    from sys import exit
+
+    system("clear")
+    exit(main())
