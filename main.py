@@ -90,5 +90,9 @@ def main():
     log.info('Script completed')
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    from os import system
+    from sys import exit
+
+    system("clear")
+    exit(main())
