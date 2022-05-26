@@ -48,6 +48,36 @@ def read_in_file(path: str, filename: str, mode: str = 'r'):
     return
 
 
+def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') -> None:
+# {{{
+    """Writes the passed text file_text to a file in path under the name
+    filename. Passing mode as 'a' will append instead of write/re-write.
+
+    imports:
+        os, sys
+
+    Attributes:
+        path [str]: Path to the file with all forward slashes required.
+        filename [str]: Name of the file to written to.
+        mode [str]: Write, append mode for file action. Defaults to 'w'.
+
+    Return:
+        N/A
+    """
+    if not path.startswith('/') or not path.endswith('/'):
+        os.system('clear')
+        print('\nFront and trailing forward slashes are needed.\n')
+        sys.exit()
+    path_name = os.path.join(path, filename)
+    try:
+        with open(path_name, mode) as fo:
+            fo.write(file_text)
+    except Exception as e:
+        os.system('clear')
+        print(f'An Error has occured. Error: {e}\n')
+        # }}}
+
+
 def write_games(filename, games):
     try:
         with open(filename, 'w') as write:
