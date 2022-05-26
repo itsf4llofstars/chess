@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""main.py file for parsing chess data"""
+"""mates.py module file that can read in a pgn file, parse out only the
+chess games and parse out either the white or black checkmate wins and return
+them as either a list of strings or strings themselves
+"""
 import os
 import re
 import sys
