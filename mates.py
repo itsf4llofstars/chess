@@ -73,7 +73,6 @@ def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') ->
             fo.write(file_text)
     except Exception as e:
         log.error(f'Unknown error: {e}')
-        os.system('clear')
 
 
 def white_mates(games):
@@ -113,15 +112,24 @@ def black_mates_str(games) -> str:
     return black_mate
 
 
-
 def main():
-    """main function"""
+    """main"""
     game_list = read_in_file('/home/pi/python/chess/', 'all-mates.pgn')
     [print(n) for n in game_list]
 
-    checkmates = black_mates_str(game_list)
-    print(checkmates)
+    checkmates = white_mates(game_list)
+    [print(mate) for mate in checkmates]
 
+    checkmates = black_mates(game_list)
+    [print(mate) for mate in checkmates]
+
+    checkmates_str = white_mates_str(game_list)
+    print(checkmates_str)
+
+    checkmates_str = black_mates_str(game_list)
+    print(checkmates_str)
+
+    write_out_file('/home/pi/ed/', 'test-games.txt', checkmates_str)
 
 
 if __name__ == "__main__":
