@@ -73,20 +73,8 @@ def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') ->
         with open(path_name, mode) as fo:
             fo.write(file_text)
     except Exception as e:
+        log.error(f'Unknown error: {e}')
         os.system('clear')
-        print(f'An Error has occured. Error: {e}\n')
-
-
-def write_games(filename, games):
-    try:
-        with open(filename, 'w') as write:
-            for line in games:
-                write.write(line)
-                write.write(' ')
-    except Exception as e:
-        log.error(f'UNK: {e}')
-    finally:
-        log.info('write_games() called')
 
 
 def white_mates(games):
