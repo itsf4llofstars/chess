@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """mates.py module file that can read in a pgn file, parse out only the
 chess games and parse out either the white or black checkmate wins and return
-them as either a list of strings or strings themselves
+them as either a list of strings or strings themselves.
+Module has mild error checking. Logger import may not be needed.
 """
 import os
 import re
