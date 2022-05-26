@@ -76,6 +76,16 @@ def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') ->
 
 
 def white_mates(games):
+    """Interates through games list searching for games won by white with
+    a checkmate and returns those games as a list. Games in games list must
+    be on one line.
+
+    Attributes:
+        games list[str]: List of chess games.
+
+    Return:
+        white_mate list[str]: List of strings containig checkmates by white.
+    """
     white_mate = []
     # Any 2 digit number, period, whitespace, all chars, hash, whitespace, 1-0
     mate_regex = re.compile(r'\d{2}\.\s.+#\s1-0')
@@ -86,6 +96,16 @@ def white_mates(games):
 
 
 def black_mates(games):
+    """Interates through games list searching for games won by black with
+    a checkmate and returns those games as a list. Games in games list must
+    be on one line.
+
+    Attributes:
+        games list[str]: List of chess games.
+
+    Return:
+        black_mate list[str]: List of strings containig checkmates by black.
+    """
     black_mate = []
     mate_regex = re.compile(r'\d{2}\.\s.+\s.+#\s0-1')
     for game in games:
@@ -95,6 +115,16 @@ def black_mates(games):
 
 
 def white_mates_str(games) -> str:
+    """Interates through games list searching for games won by white with
+    a checkmate and returns those games as a string. Games in games list must
+    be on one line.
+
+    Attributes:
+        games list[str]: List of chess games.
+
+    Return:
+        white_mate [str]: String containig checkmates by white.
+    """
     white_mate = ''
     mate_regex = re.compile(r'\d{2}\.\s.+#\s1-0')
     for game in games:
@@ -104,6 +134,16 @@ def white_mates_str(games) -> str:
 
 
 def black_mates_str(games) -> str:
+    """Interates through games list searching for games won by black with
+    a checkmate and returns those games as a string. Games in games list must
+    be on one line.
+
+    Attributes:
+        games list[str]: List of chess games.
+
+    Return:
+        black_mate [str]: String containig checkmates by black.
+    """
     black_mate = ''
     mate_regex = re.compile(r'\d{2}\.\s.+\s.+#\s0-1')
     for game in games:
