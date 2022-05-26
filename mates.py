@@ -174,7 +174,6 @@ def main():
 
 
 if __name__ == "__main__":
-    import os
-    import sys
     os.system("clear")
     sys.exit(main())
+
