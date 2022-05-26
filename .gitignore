@@ -1,4 +1,4 @@
-# My Additions
+#My Additions
 bin/
 include/
 share/
@@ -6,6 +6,7 @@ venv/
 lib64
 pyvenv.cfg
 *.pgn
+*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
