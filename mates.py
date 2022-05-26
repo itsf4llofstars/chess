@@ -36,7 +36,6 @@ def read_in_file(path: str, filename: str, mode: str = 'r'):
         with open(path_name, mode) as fo:
             file_lines = fo.readlines()
     except FileNotFoundError as fnfe:
-        print(f'File: {filename} was not found')
         log.error(f'File not found: {fnfe}')
         sys.exit()
     else:
