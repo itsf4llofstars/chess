@@ -49,9 +49,8 @@ def read_in_file(path: str, filename: str, mode: str = 'r'):
 
 
 def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') -> None:
-# {{{
-    """Writes the passed text file_text to a file in path under the name
-    filename. Passing mode as 'a' will append instead of write/re-write.
+    """Writes the passed text, 'file_text', to a file in 'path' under the name
+    'filename'. Passing 'a' as mode will append instead of write/re-write.
 
     imports:
         os, sys
@@ -59,6 +58,7 @@ def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') ->
     Attributes:
         path [str]: Path to the file with all forward slashes required.
         filename [str]: Name of the file to written to.
+        file_text [str]: The file text to write out.
         mode [str]: Write, append mode for file action. Defaults to 'w'.
 
     Return:
@@ -75,7 +75,6 @@ def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') ->
     except Exception as e:
         os.system('clear')
         print(f'An Error has occured. Error: {e}\n')
-        # }}}
 
 
 def write_games(filename, games):
