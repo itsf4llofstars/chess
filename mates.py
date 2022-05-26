@@ -4,6 +4,9 @@ chess games and parse out either the white or black checkmate wins and return
 them as either a list of strings or strings themselves.
 Module has mild error checking. Logger import may not be needed.
 """
+
+# TODO: Error fixing of pylint errors
+
 import os
 import re
 import sys
