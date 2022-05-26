@@ -11,7 +11,7 @@ import sys
 import logger as log
 
 
-def read_in_file(path: str, filename: str, mode: str = 'r'):
+def read_in_file(path: str, filename: str, mode: str = "r"):
     """Reads in a file and strips off the last index which will be
     a newline ('\\n') character.
 
@@ -27,8 +27,8 @@ def read_in_file(path: str, filename: str, mode: str = 'r'):
         file_text list[str]: The read in data with each index being a line
                              of text.
     """
-    if not path.startswith('/') or not path.endswith('/'):
-        print('Forward slashed needed')
+    if not path.startswith("/") or not path.endswith("/"):
+        print("Forward slashed needed")
         sys.exit()
 
     path_name: str = os.path.join(path, filename)
@@ -37,7 +37,7 @@ def read_in_file(path: str, filename: str, mode: str = 'r'):
         with open(path_name, mode) as fo:
             file_lines = fo.readlines()
     except FileNotFoundError as fnfe:
-        log.error(f'File not found: {fnfe}')
+        log.error(f"File not found: {fnfe}")
         sys.exit()
     else:
         for line in file_lines:
@@ -48,7 +48,7 @@ def read_in_file(path: str, filename: str, mode: str = 'r'):
     return
 
 
-def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') -> None:
+def write_out_file(path: str, filename: str, file_text: str, mode: str = "w") -> None:
     """Writes the passed text, 'file_text', to a file in 'path' under the name
     'filename'. Passing 'a' as mode will append instead of write/re-write.
 
@@ -64,16 +64,16 @@ def write_out_file(path: str, filename: str, file_text: str, mode: str = 'w') ->
     Return:
         N/A
     """
-    if not path.startswith('/') or not path.endswith('/'):
-        os.system('clear')
-        print('\nFront and trailing forward slashes are needed.\n')
+    if not path.startswith("/") or not path.endswith("/"):
+        os.system("clear")
+        print("\nFront and trailing forward slashes are needed.\n")
         sys.exit()
     path_name = os.path.join(path, filename)
     try:
         with open(path_name, mode) as fo:
             fo.write(file_text)
     except Exception as e:
-        log.error(f'Unknown error: {e}')
+        log.error(f"Unknown error: {e}")
 
 
 def white_mates(games):
@@ -89,7 +89,7 @@ def white_mates(games):
     """
     white_mate = []
     # Any 2 digit number, period, whitespace, all chars, hash, whitespace, 1-0
-    mate_regex = re.compile(r'\d{2}\.\s.+#\s1-0')
+    mate_regex = re.compile(r"\d{2}\.\s.+#\s1-0")
     for game in games:
         if re.search(mate_regex, game):
             white_mate.append(game)
@@ -108,7 +108,7 @@ def black_mates(games):
         black_mate list[str]: List of strings containig checkmates by black.
     """
     black_mate = []
-    mate_regex = re.compile(r'\d{2}\.\s.+\s.+#\s0-1')
+    mate_regex = re.compile(r"\d{2}\.\s.+\s.+#\s0-1")
     for game in games:
         if re.search(mate_regex, game):
             black_mate.append(game)
@@ -126,11 +126,11 @@ def white_mates_str(games) -> str:
     Return:
         white_mate [str]: String containig checkmates by white.
     """
-    white_mate = ''
-    mate_regex = re.compile(r'\d{2}\.\s.+#\s1-0')
+    white_mate = ""
+    mate_regex = re.compile(r"\d{2}\.\s.+#\s1-0")
     for game in games:
         if re.search(mate_regex, game):
-            white_mate = white_mate + game + '\n'
+            white_mate = white_mate + game + "\n"
     return white_mate
 
 
@@ -145,17 +145,17 @@ def black_mates_str(games) -> str:
     Return:
         black_mate [str]: String containig checkmates by black.
     """
-    black_mate = ''
-    mate_regex = re.compile(r'\d{2}\.\s.+\s.+#\s0-1')
+    black_mate = ""
+    mate_regex = re.compile(r"\d{2}\.\s.+\s.+#\s0-1")
     for game in games:
         if re.search(mate_regex, game):
-            black_mate = black_mate + game + '\n'
+            black_mate = black_mate + game + "\n"
     return black_mate
 
 
 def main():
     """main"""
-    game_list = read_in_file('/home/pi/python/chess/', 'all-mates.pgn')
+    game_list = read_in_file("/home/pi/python/chess/", "all-mates.pgn")
     [print(n) for n in game_list]
 
     checkmates = white_mates(game_list)
@@ -170,10 +170,9 @@ def main():
     checkmates_str = black_mates_str(game_list)
     print(checkmates_str)
 
-    write_out_file('/home/pi/ed/', 'test-games.txt', checkmates_str)
+    write_out_file("/home/pi/ed/", "test-games.txt", checkmates_str)
 
 
 if __name__ == "__main__":
     os.system("clear")
     sys.exit(main())
-
