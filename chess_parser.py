@@ -63,9 +63,17 @@ def wins_list(games, winning_games, white=True):
             winning_games.append(game)
 
 
-def wins_str():
+def wins_str(games, white=True):
     """DOC"""
-    pass
+    wins_regex = re.compile(r"1-0$")
+    if not white:
+        wins_regex = re.compile(r"0-1$")
+
+    winning_str = ''
+    for game in games:
+        if re.search(wins_regex, game):
+            winning_str += f'{game}\n'
+
 
 def opeinings():
     """DOC"""
