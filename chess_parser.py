@@ -73,6 +73,29 @@ def wins_str(games, white=True):
     for game in games:
         if re.search(wins_regex, game):
             winning_str += f'{game}\n'
+    return winning_str
+
+
+def mate_list(games, mates, white=True):
+    mate_regex = re.compile(r'\d{2}\.\s.+#\s1-0')
+    if not white:
+        mate_regex = re.compile(r'\d\d\.\s.+#\s0-1')
+
+    for game in games:
+        if re.search(mate_regex, game):
+            mates.append(game)
+
+
+def mate_str(games, white=True):
+    mate_regex = re.compile(r'\d{2}\.\s.+#\s1-0')
+    if not white:
+        mate_regex = re.compile(r'\d\d\.\s.+#\s0-1')
+
+    mates = ''
+    for game in games:
+        if re.search(mate_regex, game):
+            mates += f'{game}\n'
+    return mates
 
 
 def opeinings():
@@ -92,7 +115,14 @@ def main():
     only_the_games = get_games(stripped_games)
     # [print(game) for game in only_the_games]
 
-    for game in only_the_games:
+    game_wins = []
+    wins_list(only_the_games, game_wins, False)
+
+    game_win_str = wins_str(only_the_games)
+    print(game_win_str)
+
+
+    for game in game_wins:
         print(game)
 
 
