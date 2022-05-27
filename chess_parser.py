@@ -122,13 +122,20 @@ def all_mates_str(games) -> str:
     return mates
 
 
-def opeinings():
+def openings(opening, games):
     """DOC"""
+    openings_regex = re.compile(opening)
+
+    chess_openings = ""
+    for game in games:
+        if re.search(openings_regex, game):
+            chess_openings += f"{game}\n"
+    return chess_openings
 
 
 def main() -> None:
     """main"""
-    full_path = create_full_path("/home/bumper/chess", "chess.pgn")
+    full_path = create_full_path("/home/pi/python/chess", "all-mates.pgn")
     pgn_games = read_file(full_path)
     stripped_games = strip_new_lines(pgn_games)
     only_the_games = get_games(stripped_games)
@@ -145,7 +152,17 @@ def main() -> None:
     wins_string = mate_str(only_the_games, False)
     wins_string = all_mates_str(only_the_games)
 
-    print(wins_string)
+    game = ["1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 c3", "1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5 c3"]
+
+    ruy_lopez = r"1. e4 e5 2. Nf3 Nc6 3. Bb5"
+    italian = r"1. e4 e5 2. Nf3 Nc6 3. Bc4"
+
+    ruy = openings(ruy_lopez, game)
+    print(ruy)
+
+    game = [r"1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 c3", r"1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5 c3"]
+    italy = openings(italian, game)
+    print(italy)
 
 
 if __name__ == "__main__":
