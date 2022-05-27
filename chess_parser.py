@@ -10,7 +10,7 @@ import sys
 import logger as log
 
 
-def create_full_path(path, filename):
+def create_full_path(path, filename) -> str:
     """DOC"""
     if not path.startswith("/") or path.endswith("/"):
         log.error("Leading path slashes missing.")
@@ -43,7 +43,8 @@ def strip_new_lines(text_lines):
 
 
 def get_games(games):
-    """DOC: Game must be on one singel non-wrapped line."""
+    """DOC: Game must be on one single line (non-wrapped) with no white-
+    space at end of the line (game)."""
     regex_game = r"^[1]\."
     only_games = []
     for game in games:
@@ -52,7 +53,7 @@ def get_games(games):
     return only_games
 
 
-def wins_list(games, winning_games, white=True):
+def wins_list(games, winning_games, white=True) -> None:
     """DOC"""
     wins_regex = re.compile(r"1-0$")
     if not white:
@@ -63,7 +64,7 @@ def wins_list(games, winning_games, white=True):
             winning_games.append(game)
 
 
-def wins_str(games, white=True):
+def wins_str(games, white=True) -> str:
     """DOC"""
     wins_regex = re.compile(r"1-0$")
     if not white:
@@ -76,7 +77,7 @@ def wins_str(games, white=True):
     return winning_str
 
 
-def mate_list(games, mates, white=True):
+def mate_list(games, mates, white=True) -> None:
     """DOC"""
     mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
     if not white:
@@ -87,7 +88,7 @@ def mate_list(games, mates, white=True):
             mates.append(game)
 
 
-def mate_str(games, white=True):
+def mate_str(games, white=True) -> str:
     """DOC"""
     mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
     if not white:
@@ -100,7 +101,7 @@ def mate_str(games, white=True):
     return mates
 
 
-def all_mates_list(games, mates):
+def all_mates_list(games, mates) -> None:
     """DOC"""
     mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
 
@@ -109,7 +110,7 @@ def all_mates_list(games, mates):
             mates.append(game)
 
 
-def all_mates_str(games):
+def all_mates_str(games) -> str:
     """DOC"""
     mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
 
@@ -124,20 +125,26 @@ def opeinings():
     """DOC"""
 
 
-def main():
+def main() -> None:
     """main"""
     full_path = create_full_path("/home/bumper/chess", "chess.pgn")
     pgn_games = read_file(full_path)
-    # [print(game) for game in pgn_games]
-
     stripped_games = strip_new_lines(pgn_games)
-    # [print(game) for game in stripped_games]
-
     only_the_games = get_games(stripped_games)
-    # [print(game) for game in only_the_games]
+    wins = []
+    wins_list(only_the_games, wins)
+    wins_list(only_the_games, wins, False)
+    mate_list(only_the_games, wins)
+    mate_list(only_the_games, wins, False)
+    all_mates_list(only_the_games, wins)
 
-    game_wins = []
-    wins_list(only_the_games, game_wins, False)
+    wins_string = wins_str(only_the_games)
+    wins_string = wins_str(only_the_games, False)
+    wins_string = mate_str(only_the_games)
+    wins_string = mate_str(only_the_games, False)
+    wins_string = all_mates_str(only_the_games)
+
+    print(wins_str)
 
 
 if __name__ == "__main__":
