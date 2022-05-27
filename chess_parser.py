@@ -77,6 +77,7 @@ def wins_str(games, white=True):
 
 
 def mate_list(games, mates, white=True):
+    """DOC"""
     mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
     if not white:
         mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
@@ -87,6 +88,7 @@ def mate_list(games, mates, white=True):
 
 
 def mate_str(games, white=True):
+    """DOC"""
     mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
     if not white:
         mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
@@ -99,6 +101,7 @@ def mate_str(games, white=True):
 
 
 def all_mates_list(games, mates):
+    """DOC"""
     mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
 
     for game in games:
@@ -107,6 +110,7 @@ def all_mates_list(games, mates):
 
 
 def all_mates_str(games):
+    """DOC"""
     mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
 
     mates = ""
@@ -118,7 +122,6 @@ def all_mates_str(games):
 
 def opeinings():
     """DOC"""
-    pass
 
 
 def main():
@@ -135,13 +138,6 @@ def main():
 
     game_wins = []
     wins_list(only_the_games, game_wins, False)
-
-    game_win_str = wins_str(only_the_games)
-
-    all_wins = []
-    all_mates_list(only_the_games, all_wins)
-    for game in all_wins:
-        print(game)
 
 
 if __name__ == "__main__":
