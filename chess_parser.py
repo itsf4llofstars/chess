@@ -7,6 +7,7 @@ import os
 import re
 import sys
 
+# Not needed if not using the logger.py file, adjust code accordingly.
 import logger as log
 
 
