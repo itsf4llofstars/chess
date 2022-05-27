@@ -52,6 +52,31 @@ def get_games(games):
     return only_games
 
 
+def white_wins_list():
+    """DOC"""
+    pass
+
+
+def white_wins_str():
+    """DOC"""
+    pass
+
+
+def black_wins_list():
+    """DOC"""
+    pass
+
+
+def black_wins_str():
+    """DOC"""
+    pass
+
+
+def opeinings():
+    """DOC"""
+    pass
+
+
 def main():
     """main"""
     full_path = create_full_path("/home/bumper/chess", "chess.pgn")
