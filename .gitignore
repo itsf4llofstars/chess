@@ -9,6 +9,9 @@ pyvenv.cfg
 *.txt
 .vscode/
 vscode/
+audio/
+*.tar
+*.mp3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
