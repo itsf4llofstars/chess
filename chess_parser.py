@@ -54,6 +54,12 @@ def get_games(games):
     return only_games
 
 
+def normalize_games(games):
+    """DOC"""
+    for game in games:
+        ...
+
+
 def wins_list(games, winning_games, white=True) -> None:
     """DOC"""
     wins_regex = re.compile(r"1-0$")
