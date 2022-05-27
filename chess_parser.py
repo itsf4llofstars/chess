@@ -69,17 +69,17 @@ def wins_str(games, white=True):
     if not white:
         wins_regex = re.compile(r"0-1$")
 
-    winning_str = ''
+    winning_str = ""
     for game in games:
         if re.search(wins_regex, game):
-            winning_str += f'{game}\n'
+            winning_str += f"{game}\n"
     return winning_str
 
 
 def mate_list(games, mates, white=True):
-    mate_regex = re.compile(r'[1-4]\d\.\s.+#\s1-0')
+    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
     if not white:
-        mate_regex = re.compile(r'[1-4]\d\.\s.+#\s0-1')
+        mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
 
     for game in games:
         if re.search(mate_regex, game):
@@ -87,19 +87,19 @@ def mate_list(games, mates, white=True):
 
 
 def mate_str(games, white=True):
-    mate_regex = re.compile(r'[1-4]\d\.\s.+#\s1-0')
+    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
     if not white:
-        mate_regex = re.compile(r'[1-4]\d\.\s.+#\s0-1')
+        mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
 
-    mates = ''
+    mates = ""
     for game in games:
         if re.search(mate_regex, game):
-            mates += f'{game}\n'
+            mates += f"{game}\n"
     return mates
 
 
 def all_mates_list(games, mates):
-    mate_regex = re.compile(r'[1-4]\d\.\s.+#\s[0-1]-[0-1]')
+    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
 
     for game in games:
         if re.search(mate_regex, game):
@@ -107,12 +107,12 @@ def all_mates_list(games, mates):
 
 
 def all_mates_str(games):
-    mate_regex = re.compile(r'[1-4]\d\.\s.+#\s[0-1]-[0-1]')
+    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
 
-    mates = ''
+    mates = ""
     for game in games:
         if re.search(mate_regex, game):
-            mates += f'{game}\n'
+            mates += f"{game}\n"
     return mates
 
 
