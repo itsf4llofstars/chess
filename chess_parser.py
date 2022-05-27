@@ -144,7 +144,7 @@ def main() -> None:
     wins_string = mate_str(only_the_games, False)
     wins_string = all_mates_str(only_the_games)
 
-    print(wins_str)
+    print(wins_string)
 
 
 if __name__ == "__main__":
