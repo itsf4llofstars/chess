@@ -75,7 +75,7 @@ def wins_str(games, white=True):
             winning_str += f'{game}\n'
     return winning_str
 
-# "[1-4]\d\.\s.+#\s[0-1]-[0-1]"
+
 def mate_list(games, mates, white=True):
     mate_regex = re.compile(r'[1-4]\d\.\s.+#\s1-0')
     if not white:
@@ -85,10 +85,29 @@ def mate_list(games, mates, white=True):
         if re.search(mate_regex, game):
             mates.append(game)
 
+
 def mate_str(games, white=True):
     mate_regex = re.compile(r'[1-4]\d\.\s.+#\s1-0')
     if not white:
         mate_regex = re.compile(r'[1-4]\d\.\s.+#\s0-1')
+
+    mates = ''
+    for game in games:
+        if re.search(mate_regex, game):
+            mates += f'{game}\n'
+    return mates
+
+
+def all_mates_list(games, mates):
+    mate_regex = re.compile(r'[1-4]\d\.\s.+#\s[0-1]-[0-1]')
+
+    for game in games:
+        if re.search(mate_regex, game):
+            mates.append(game)
+
+
+def all_mates_str(games):
+    mate_regex = re.compile(r'[1-4]\d\.\s.+#\s[0-1]-[0-1]')
 
     mates = ''
     for game in games:
@@ -119,8 +138,10 @@ def main():
 
     game_win_str = wins_str(only_the_games)
 
-    mate_wins = mate_str(only_the_games, False)
-    print(mate_wins)
+    all_wins = []
+    all_mates_list(only_the_games, all_wins)
+    for game in all_wins:
+        print(game)
 
 
 if __name__ == "__main__":
