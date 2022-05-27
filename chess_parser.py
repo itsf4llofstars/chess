@@ -52,25 +52,20 @@ def get_games(games):
     return only_games
 
 
-def white_wins_list():
+def wins_list(games, winning_games, white=True):
+    """DOC"""
+    wins_regex = re.compile(r"1-0$")
+    if not white:
+        wins_regex = re.compile(r"0-1$")
+
+    for game in games:
+        if re.search(wins_regex, game):
+            winning_games.append(game)
+
+
+def wins_str():
     """DOC"""
     pass
-
-
-def white_wins_str():
-    """DOC"""
-    pass
-
-
-def black_wins_list():
-    """DOC"""
-    pass
-
-
-def black_wins_str():
-    """DOC"""
-    pass
-
 
 def opeinings():
     """DOC"""
