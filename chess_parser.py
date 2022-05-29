@@ -7,6 +7,9 @@ import os
 import re
 import sys
 
+# TODO: Set a return of [n][:-5] to strip hash mark
+# TODO: Strip non-essential marks, +, #
+
 # Not needed if not using the logger.py file, adjust code accordingly. Can
 # we do a check to see if logger is imported and set a conditional for
 # logging?
@@ -68,10 +71,11 @@ def write_games(filename, games):
             for line in games:
                 write.write(line)
                 write.write(' ')
+            write.write('\n')
     except Exception as e:
-        log.error(f'UNK: {e}')
+        log.error(f'write_games(): UNK: {e}')
     finally:
-        log.info('write_games() called')
+        log.info('write_games(): called')
 
 
 def wins_list(games, winning_games, white=True) -> None:
