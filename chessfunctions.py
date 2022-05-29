@@ -11,8 +11,7 @@ def create_full_path(path, filename) -> str:
     """DOC"""
     # Path string should start with / and not end with /
     if not path.startswith("/") or path.endswith("/"):
-        log.error("create_full_path(): Leading path slashes missing.")
-        print("Exiting; See chess.log")
+        print("Preceeding forward slash needed. Trailing forward slash not needed.")
         sys.exit()
 
     return os.path.join(path, filename)
@@ -23,7 +22,7 @@ def read_file(path):
     try:
         with open(path, "r", encoding="utf-8") as file_object:
             pgn_file = file_object.readlines()
-    except FileNotFoundError as fnfe:
+    except FileNotFoundError:
         print("The file was not found.")
         sys.exit()
     else:
@@ -56,15 +55,16 @@ def normalize_games(games):
     """DOC"""
     ...
 
+
 def write_games(filename, games):
     """Writes out only the games with one game per line
     to a text file.
     """
     try:
-        with open(filename, 'w') as write:
+        with open(filename, "w") as write:
             for line in games:
                 write.write(line)
-                write.write('\n')
+                write.write("\n")
     except Exception as e:
         print(f"UNK ERR: {e}")
 
@@ -150,10 +150,7 @@ def openings(opening, games):
 
 def get_path():
     """Gets the path form user"""
-    print(
-        "Enter the path to the pgn file\n",
-        "Ex. /home/user/[directory /..]\n"
-    )
+    print("Enter the path to the pgn file\n", "Ex. /home/user/[directory /..]\n")
     path = str(input())
     return path
 
