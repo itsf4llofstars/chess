@@ -16,7 +16,7 @@ games_file = cf.read_file(path_file)  # Works
 cleaned_games = cf.strip_new_lines(games_file)  # Works
 just_games = cf.get_games(cleaned_games)  # Works
 
-cf.write_games('bacon.pgn', just_games)  # Works
+cf.write_games("bacon.pgn", just_games)  # Works
 
 # cf.wins_list(buz, ww)  # Works
 # cf.wins_list(buz, bw, False)  # Works
