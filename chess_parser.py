@@ -71,6 +71,7 @@ def write_games(filename, games):
             for line in games:
                 write.write(line)
                 write.write(' ')
+            write.write('\n')
     except Exception as e:
         log.error(f'write_games(): UNK: {e}')
     finally:
