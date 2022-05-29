@@ -6,4 +6,5 @@ path = '/home/pi/python/chess'
 filename = 'a_game.pgn'
 
 full_path = pc.create_full_path(path, filename)
-chess_games = pc.read_file(full_path)
+raw_games = pc.read_file(full_path)
+chess_games = pc.strip_new_lines(raw_games)
