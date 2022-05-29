@@ -13,8 +13,9 @@ import logger as log
 
 def create_full_path(path, filename) -> str:
     """DOC"""
+    # Path string should start with / and not end with /
     if not path.startswith("/") or path.endswith("/"):
-        log.error("Leading path slashes missing.")
+        log.error("create_full_path(): Leading path slashes missing.")
         print("Exiting; See chess.log")
         sys.exit()
 
@@ -27,7 +28,7 @@ def read_file(path):
         with open(path, "r", encoding="utf-8") as file_object:
             pgn_file = file_object.readlines()
     except FileNotFoundError as fnfe:
-        log.error(f"FileNotFoundError: {fnfe}")
+        log.error(f"read_file(): FileNotFoundError: {fnfe}")
         print("Exiting; See chess.log")
         sys.exit()
     else:
