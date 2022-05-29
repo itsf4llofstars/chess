@@ -3,7 +3,7 @@
 import chess_parser as pc
 
 path = '/home/pi/python/chess'
-filename = 'a_game.py'
+filename = 'a_game.pgn'
 
 full_path = pc.create_full_path(path, filename)
-print(full_path)
+chess_games = pc.read_file(full_path)
