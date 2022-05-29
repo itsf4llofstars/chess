@@ -13,8 +13,9 @@ import logger as log
 
 def create_full_path(path, filename) -> str:
     """DOC"""
+    # Path string should start with / and not end with /
     if not path.startswith("/") or path.endswith("/"):
-        log.error("Leading path slashes missing.")
+        log.error("create_full_path(): Leading path slashes missing.")
         print("Exiting; See chess.log")
         sys.exit()
 
