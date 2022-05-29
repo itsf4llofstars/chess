@@ -11,7 +11,8 @@ def create_full_path(path, filename) -> str:
     """DOC"""
     # Path string should start with / and not end with /
     if not path.startswith("/") or path.endswith("/"):
-        print("Preceeding forward slash needed. Trailing forward slash not needed.")
+        print("Preceeding forward slash needed. Trailing forward slash not"
+              "needed.")
         sys.exit()
 
     return os.path.join(path, filename)
@@ -150,7 +151,7 @@ def openings(opening, games):
 
 def get_path():
     """Gets the path form user"""
-    print("Enter the path to the pgn file\n", "Ex. /home/user/[directory /..]\n")
+    print("Enter the path to the pgn file\n", "Ex. /path/to/file\n")
     path = str(input())
     return path
 
