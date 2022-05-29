@@ -7,6 +7,8 @@ import os
 import re
 import sys
 
+# TODO: Set a return of [n][:-5] to strip hash mark
+
 # Not needed if not using the logger.py file, adjust code accordingly. Can
 # we do a check to see if logger is imported and set a conditional for
 # logging?
