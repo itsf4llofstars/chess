@@ -62,6 +62,17 @@ def normalize_games(games):
     for game in games:
         ...
 
+def write_games(filename, games):
+    try:
+        with open(filename, 'w') as write:
+            for line in games:
+                write.write(line)
+                write.write(' ')
+    except Exception as e:
+        log.error(f'UNK: {e}')
+    finally:
+        log.info('write_games() called')
+
 
 def wins_list(games, winning_games, white=True) -> None:
     """DOC"""
