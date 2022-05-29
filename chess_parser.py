@@ -28,7 +28,7 @@ def read_file(path):
         with open(path, "r", encoding="utf-8") as file_object:
             pgn_file = file_object.readlines()
     except FileNotFoundError as fnfe:
-        log.error(f"FileNotFoundError: {fnfe}")
+        log.error(f"read_file(): FileNotFoundError: {fnfe}")
         print("Exiting; See chess.log")
         sys.exit()
     else:
