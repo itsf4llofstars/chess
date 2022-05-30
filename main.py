@@ -1,12 +1,29 @@
 #!/usr/bin/env python3
 """main.py file for parsing chess data"""
-import chess_parser as pc
+import chessfunctions as cf
 
-path = "/home/pi/python/chess"
-filename = "a_game.pgn"
+user_path = cf.get_path()
+user_file = cf.get_filename()
 
-full_path = pc.create_full_path(path, filename)
-raw_games = pc.read_file(full_path)
-chess_pgn = pc.strip_new_lines(raw_games)
-chess_games = pc.get_games(chess_pgn)
-pc.write_games("new-game.txt", chess_games)
+path_file = cf.create_full_path(user_path, user_file)  # Works
+games_file = cf.read_file(path_file)  # Works
+cleaned_games = cf.strip_new_lines(games_file)  # Works
+just_games = cf.get_games(cleaned_games)  # Works
+
+white_mates = []
+cf.wins_list(just_games, white_mates)
+
+for game in white_mates:
+    print(game)
+
+print()
+
+black_mates = []
+cf.wins_list(just_games, black_mates, False)
+
+for game in black_mates:
+    print(game)
+
+
+print(len(white_mates))
+print(len(black_mates))
