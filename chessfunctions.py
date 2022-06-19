@@ -19,8 +19,8 @@ def create_full_path(path, filename) -> str:
 def read_file(path):
     """Reads in the text pgn file and returns a list of lines"""
     try:
-        with open(path, "r", encoding="utf-8") as file_object:
-            pgn_file = file_object.readlines()
+        with open(path, "r", encoding="utf-8") as fo:
+            pgn_file = fo.readlines()
     except FileNotFoundError:
         print("The file was not found.")
         sys.exit()
@@ -29,13 +29,10 @@ def read_file(path):
 
 
 def strip_new_lines(text_lines):
-    """DOC"""
+    """Strips off the ending newlin character"""
     no_newlines = []
-    # [no_newlines.append(line[:-1]) for line in text_line]
     for line in text_lines:
-        no_nl = line[:-1]
-        if len(no_nl):
-            no_newlines.append(no_nl)
+        no_newlines.append(line.strip())
     return no_newlines
 
 
@@ -45,7 +42,7 @@ def get_games(games):
     regex_game = r"^[1]\."
     only_games = []
     for game in games:
-        if re.search(regex_game, game):
+        if regex_game.search(game):
             only_games.append(game)
     return only_games
 
@@ -56,9 +53,7 @@ def normalize_games(games):
 
 
 def write_games(filename, games):
-    """Writes out only the games with one game per line
-    to a text file.
-    """
+    """Writes out only the games with one game per line to a text file."""
     try:
         with open(filename, "w") as write:
             for line in games:
@@ -161,8 +156,6 @@ def get_filename():
 
 
 def main():
-    print(__name__)
-
     lines = [
         '31. ww a8=Q Kd7 32. Rb6 e3 33. Qa7+ Ke8 34. Rb8 1-0',
         '21. wwm Qe2 Bc6 22. Qe7+ Kg8 23. Qe8+ Bxe8 24. Rxe8# 1-0',
@@ -178,7 +171,7 @@ def main():
         '50. dd g5 hxg5 51. Bxg5 Qf5+ 52. Ka1 Qxf2 53. Rc5 Qxb2 1/2-1/2'
     ]
 
-    # Regex's that work
+    # Regex's that work (may need to use findall)
     ww = re.compile(r'[2-3]\d\.\s.+\s1-0')
     wwm = re.compile(r'[2-3]\d\.\s.+#\s1-0')
     bw = re.compile(r'[2-3]\d\.\s.+\s.+\s0-1')
