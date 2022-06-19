@@ -6,6 +6,7 @@ import os
 import sys
 import re
 
+# WHITE[BLACK]_MATE may need the list to be scrubbed to # 1[0]-0[1]
 WHITE_MATE = (
     r"\s[2-3]\d\.\s[a-hB-R][1-8a-x][1-8a-h]?#?=?[1-8B-R]?#?[1-8]?#?=?[B-R]?#?\s1-0"
 )
@@ -97,6 +98,7 @@ def wins_str(games, white=True) -> str:
 def mate_list(games, mates, white=True) -> None:
     """DOC"""
     global WHITE_MATE, BLACK_MATE
+
     mate_regex = re.compile(WHITE_MATE)
     if not white:
         mate_regex = re.compile(BLACK_MATE)
@@ -121,10 +123,8 @@ def mate_str(games, white=True) -> str:
 
 def all_mates_list(games, mates) -> None:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
-
     for game in games:
-        if re.search(mate_regex, game):
+        if game.endswith('# 1-0') or game.endswith('# 0-1'):
             mates.append(game)
 
 
@@ -179,9 +179,10 @@ def main():
         '50. dd g5 hxg5 51. Bxg5 Qf5+ 52. Ka1 Qxf2 53. Rc5 Qxb2 1/2-1/2'
     ]
 
-    white_mates = []
-    mate_list(lines, white_mates)
-    [print(mate) for mate in white_mates]
+    mates = []
+    mate_list(lines, mates, False)
+    [print(mate) for mate in mates]
+
 
 if __name__ == '__main__':
     main()
