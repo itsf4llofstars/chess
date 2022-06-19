@@ -156,8 +156,6 @@ def get_filename():
 
 
 def main():
-    print(__name__)
-
     lines = [
         '31. ww a8=Q Kd7 32. Rb6 e3 33. Qa7+ Ke8 34. Rb8 1-0',
         '21. wwm Qe2 Bc6 22. Qe7+ Kg8 23. Qe8+ Bxe8 24. Rxe8# 1-0',
@@ -173,7 +171,7 @@ def main():
         '50. dd g5 hxg5 51. Bxg5 Qf5+ 52. Ka1 Qxf2 53. Rc5 Qxb2 1/2-1/2'
     ]
 
-    # Regex's that work
+    # Regex's that work (may need to use findall)
     ww = re.compile(r'[2-3]\d\.\s.+\s1-0')
     wwm = re.compile(r'[2-3]\d\.\s.+#\s1-0')
     bw = re.compile(r'[2-3]\d\.\s.+\s.+\s0-1')
