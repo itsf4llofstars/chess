@@ -68,13 +68,10 @@ def write_games(filename, games):
 
 def wins_list(games, winning_games, white=True) -> None:
     """DOC"""
-    wins_regex = re.compile(r'[2-3]\d\.\s.+#\s1-0')
+    ending = '1-0'
     if not white:
-        wins_regex = re.compile(r'[2-3]\d\.\s.+\s.+#\s0-1')
-
-    for game in games:
-        if re.search(wins_regex, game):
-            winning_games.append(game)
+        ending = '0-1'
+    [winning_games.append(game) for game in games if game.endswith(ending)]
 
 
 def mate_list(games, mates, white=True) -> None:
