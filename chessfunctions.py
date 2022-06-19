@@ -123,9 +123,7 @@ def mate_str(games, white=True) -> str:
 
 def all_mates_list(games, mates) -> None:
     """DOC"""
-    for game in games:
-        if game.endswith('# 1-0') or game.endswith('# 0-1'):
-            mates.append(game)
+    [mates.append(game) for game in games if game.endswith('# 1-0') or game.endswith('# 0-1')]
 
 
 def all_mates_str(games) -> str:
@@ -180,7 +178,7 @@ def main():
     ]
 
     mates = []
-    mate_list(lines, mates, False)
+    all_mates_list(lines, mates)
     [print(mate) for mate in mates]
 
 
