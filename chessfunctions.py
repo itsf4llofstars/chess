@@ -3,8 +3,8 @@ A Python functions file using only those required for the parsing of chess
 games
 """
 import os
-import sys
 import re
+import sys
 
 # WHITE[BLACK]_MATE may need the list to be scrubbed to # 1[0]-0[1]
 WHITE_MATE = (
@@ -120,18 +120,18 @@ def get_filename():
 
 def main():
     lines = [
-        "31. ww a8=Q Kd7 32. Rb6 e3 33. Qa7+ Ke8 34. Rb8 1-0",
-        "21. wwm Qe2 Bc6 22. Qe7+ Kg8 23. Qe8+ Bxe8 24. Rxe8# 1-0",
-        "50. wwm c6 Ka7 51. c7 Ka8 52. c8=Q+ Ka7 53. Qb7# 1-0",
-        "20. dd Rd1 Rxd1+ 21. Kxd1 gxh5 22. Bd4+ f6 23. Bxf6 1/2-1/2",
-        "20. dd Rd1 Rxd1+ 21. Kxd1 gxh5 22. Bd4+ f6 23. Rh4 Bxf6 1/2-1/2",
-        "50. ww e6 Nf5+ 51. Kg6 Nh4+ 52. Kg7 Nf5+ 53. Kg6 Kd8 1-0",
-        "26. bw Qxc6 Qxa3 27. Qd7 Qa1+ 28. Kh2 a4 29. Kg6 Qxg7 0-1",
-        "34. bwm Kh3 Kf5 35. g4+ Kg6 36. f4 f5 37. Nh4 Re6# 0-1",
-        "50. bwm Nxg3 Rxh3 51. Qe2 Rxg3+ 52. fxg3 Qxg3+ 53. Qg2 Qxg2# 0-1",
-        "50. bw Kg5 Rc5+ 51. Kh6 Rc4 52. Kg5 Rb5+ 53. Kh6 Rh4 0-1",
-        "50. dd g5 hxg5 51. Bxg5 Qf5+ 52. Ka1 Qxf2 53. Qxb2 1/2-1/2",
-        "50. dd g5 hxg5 51. Bxg5 Qf5+ 52. Ka1 Qxf2 53. Rc5 Qxb2 1/2-1/2",
+        "34. Rb8 1-0",
+        "24. Rxe8# 1-0",
+        "53. Qb7# 1-0",
+        "23. Bxf6 1-0",
+        "23. Bxf6 1-0",
+        "53. Kd8 1-0",
+        "29. Qxg7 1-0",
+        "37. Re6# 1-0",
+        "53. Qxg2# 1-0",
+        "53. Rh4 1-0",
+        "53. Qxb2 1-0",
+        "53. Qxb2 1-0",
     ]
 
     mates = []
@@ -140,4 +140,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
