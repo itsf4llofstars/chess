@@ -82,19 +82,6 @@ def wins_list(games, winning_games, white=True) -> None:
             winning_games.append(game)
 
 
-def wins_str(games, white=True) -> str:
-    """DOC"""
-    wins_regex = re.compile(r"1-0$")
-    if not white:
-        wins_regex = re.compile(r"0-1$")
-
-    winning_str = ""
-    for game in games:
-        if re.search(wins_regex, game):
-            winning_str += f"{game}\n"
-    return winning_str
-
-
 def mate_list(games, mates, white=True) -> None:
     """DOC"""
     global WHITE_MATE, BLACK_MATE
@@ -108,33 +95,9 @@ def mate_list(games, mates, white=True) -> None:
             mates.append(game)
 
 
-def mate_str(games, white=True) -> str:
-    """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
-    if not white:
-        mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
-
-    mates = ""
-    for game in games:
-        if re.search(mate_regex, game):
-            mates += f"{game}\n"
-    return mates
-
-
 def all_mates_list(games, mates) -> None:
     """DOC"""
     [mates.append(game) for game in games if game.endswith('# 1-0') or game.endswith('# 0-1')]
-
-
-def all_mates_str(games) -> str:
-    """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
-
-    mates = ""
-    for game in games:
-        if re.search(mate_regex, game):
-            mates += f"{game}\n"
-    return mates
 
 
 def openings(opening, games):
