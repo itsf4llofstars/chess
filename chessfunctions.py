@@ -96,12 +96,13 @@ def wins_str(games, white=True) -> str:
 
 def mate_list(games, mates, white=True) -> None:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    global WHITE_MATE, BLACK_MATE
+    mate_regex = re.compile(WHITE_MATE)
     if not white:
-        mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        mate_regex = re.compile(BLACK_MATE)
 
     for game in games:
-        if re.search(mate_regex, game):
+        if mate_regex.findall(game):
             mates.append(game)
 
 
@@ -178,6 +179,9 @@ def main():
         '50. dd g5 hxg5 51. Bxg5 Qf5+ 52. Ka1 Qxf2 53. Rc5 Qxb2 1/2-1/2'
     ]
 
+    white_mates = []
+    mate_list(lines, white_mates)
+    [print(mate) for mate in white_mates]
 
 if __name__ == '__main__':
     main()
