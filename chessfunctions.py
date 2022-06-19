@@ -53,9 +53,7 @@ def normalize_games(games):
 
 
 def write_games(filename, games):
-    """Writes out only the games with one game per line
-    to a text file.
-    """
+    """Writes out only the games with one game per line to a text file."""
     try:
         with open(filename, "w") as write:
             for line in games:
