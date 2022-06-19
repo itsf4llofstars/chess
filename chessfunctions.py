@@ -44,15 +44,10 @@ def strip_new_lines(text_lines):
     return no_newlines
 
 
-def get_games(games):
+def get_games(pgn_list, games):
     """DOC: Game must be on one single line (non-wrapped) with no white-
     space at end of the line (game)."""
-    regex_game = r"^[1]\."
-    only_games = []
-    for game in games:
-        if regex_game.search(game):
-            only_games.append(game)
-    return only_games
+    [games.append(game) for game in pgn_list if game.startswith('1.')]
 
 
 def normalize_games(games):
