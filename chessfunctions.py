@@ -42,7 +42,7 @@ def get_games(games):
     regex_game = r"^[1]\."
     only_games = []
     for game in games:
-        if re.search(regex_game, game):
+        if regex_game.search(game):
             only_games.append(game)
     return only_games
 
