@@ -178,38 +178,6 @@ def main():
         '50. dd g5 hxg5 51. Bxg5 Qf5+ 52. Ka1 Qxf2 53. Rc5 Qxb2 1/2-1/2'
     ]
 
-    # Regex's that work (may need to use findall)
-    ww = re.compile(r'[2-3]\d\.\s.+\s1-0')
-    wwm = re.compile(r'[2-3]\d\.\s.+#\s1-0')
-    bw = re.compile(r'[2-3]\d\.\s.+\s.+\s0-1')
-    bwm = re.compile(r'[2-3]\d\.\s.+\s.+#\s0-1')
-    dd = re.compile(r'\s1\/2-1\/2')
-
-    print('\nWhite Wins Mate')
-    for line in lines:
-        if re.search(wwm, line):
-            print(line)
-
-    print('\nWhite Wins')
-    for line in lines:
-        if re.search(ww, line):
-            print(line)
-
-    print('\nBlack Wins Mate')
-    for line in lines:
-        if re.search(bwm, line):
-            print(line)
-
-    print('\nBalck Wins')
-    for line in lines:
-        if re.search(bw, line):
-            print(line)
-
-    print('\nDraw')
-    for line in lines:
-        if re.search(dd, line):
-            print(line)
-
 
 if __name__ == '__main__':
     main()
