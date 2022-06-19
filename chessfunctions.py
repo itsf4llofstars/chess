@@ -19,8 +19,8 @@ def create_full_path(path, filename) -> str:
 def read_file(path):
     """Reads in the text pgn file and returns a list of lines"""
     try:
-        with open(path, "r", encoding="utf-8") as file_object:
-            pgn_file = file_object.readlines()
+        with open(path, "r", encoding="utf-8") as fo:
+            pgn_file = fo.readlines()
     except FileNotFoundError:
         print("The file was not found.")
         sys.exit()
@@ -29,13 +29,10 @@ def read_file(path):
 
 
 def strip_new_lines(text_lines):
-    """DOC"""
+    """Strips off the ending newlin character"""
     no_newlines = []
-    # [no_newlines.append(line[:-1]) for line in text_line]
     for line in text_lines:
-        no_nl = line[:-1]
-        if len(no_nl):
-            no_newlines.append(no_nl)
+        no_newlines.append(line.strip())
     return no_newlines
 
 
