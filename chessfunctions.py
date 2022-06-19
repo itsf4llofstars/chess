@@ -8,18 +8,16 @@ import re
 
 
 def create_full_path(path, filename) -> str:
-    """DOC"""
-    # Path string should start with / and not end with /
-    if not path.startswith("/") or path.endswith("/"):
-        print("Preceeding forward slash needed. Trailing forward slash not"
-              "needed.")
+    """Joins path and filename"""
+    if not path.startswith("/"):
+        print("Leading forward slash needed.")
         sys.exit()
 
     return os.path.join(path, filename)
 
 
 def read_file(path):
-    """DOC"""
+    """Reads in the text pgn file and returns a list of lines"""
     try:
         with open(path, "r", encoding="utf-8") as file_object:
             pgn_file = file_object.readlines()
