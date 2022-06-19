@@ -9,7 +9,10 @@ import re
 WHITE_MATE = (
     r"\s[2-3]\d\.\s[a-hB-R][1-8a-x][1-8a-h]?#?=?[1-8B-R]?#?[1-8]?#?=?[B-R]?#?\s1-0"
 )
-BLACK_MATE = r"\s[2-3]\d\.\s[a-hB-R][1-8a-x][1-8a-h]?=?[1-8B-R]?[1-8]?=?[B-R]?\s[a-hB-R][1-8a-x][1-8a-h]?#?=?[1-8B-R]?#?[1-8]?#?=?[B-R]?#?\s0-1"
+BLACK_MATE = (
+    r"\s[2-3]\d\.\s[a-hB-R][1-8a-x][1-8a-h]?=?[1-8B-R]?[1-8]?=?[B-R]?\s[a-hB-R][1-8a-x][1-8a-h]?#?=?[1-8B-R]?#?[1-8]?#?=?[B-R]?#?\s0-1"
+)
+
 
 def create_full_path(path, filename) -> str:
     """Joins path and filename"""
