@@ -44,7 +44,7 @@ def read_in_file(path: str, filename: str, mode: str = "r"):
         sys.exit()
     else:
         for line in file_lines:
-            file_text.append(line[:-1])
+            file_text.append(line.strip())
     finally:
         if len(file_text):
             return file_text
@@ -158,24 +158,11 @@ def black_mates_str(games) -> str:
 
 def main():
     """main"""
-    game_list = read_in_file("/home/pi/python/chess/", "all-mates.pgn")
-    [print(n) for n in game_list]
-
-    checkmates = white_mates(game_list)
-    [print(mate) for mate in checkmates]
-
-    checkmates = black_mates(game_list)
-    [print(mate) for mate in checkmates]
-
-    checkmates_str = white_mates_str(game_list)
-    print(checkmates_str)
-
-    checkmates_str = black_mates_str(game_list)
-    print(checkmates_str)
-
-    write_out_file("/home/pi/ed/", "test-games.txt", checkmates_str)
+    game_list = read_in_file("/home/pi/python/chess/", "all-mates2.txt")
+    [print(game) for game in game_list]
 
 
 if __name__ == "__main__":
     os.system("clear")
+
     sys.exit(main())
