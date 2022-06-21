@@ -91,10 +91,9 @@ def white_mates(games):
         white_mate list[str]: List of strings containig checkmates by white.
     """
     white_mate = []
-    # Any 2 digit number, period, whitespace, all chars, hash, whitespace, 1-0
-    mate_regex = re.compile(r"\d{2}\.\s.+#\s1-0")
+    mate_regex = re.compile(r"#\s1-0")
     for game in games:
-        if re.search(mate_regex, game):
+        if mate_regex.search(game):
             white_mate.append(game)
     return white_mate
 
@@ -159,7 +158,9 @@ def black_mates_str(games) -> str:
 def main():
     """main"""
     game_list = read_in_file("/home/pi/python/chess/", "all-mates2.txt")
-    [print(game) for game in game_list]
+    white_mate = white_mates(game_list)
+    print(white_mate)
+    [print(game) for game in white_mate]
 
 
 if __name__ == "__main__":
