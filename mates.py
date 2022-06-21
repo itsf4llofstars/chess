@@ -4,9 +4,6 @@ chess games and parse out either the white or black checkmate wins and return
 them as either a list of strings or strings themselves.
 Module has mild error checking. Logger import may not be needed.
 """
-
-# TODO: Error fixing of pylint errors
-
 import os
 import re
 import sys
@@ -148,10 +145,6 @@ def main():
     str_white = win_by_mate_str(game_list)
     str_black = win_by_mate_str(game_list, 'black')
     str_both = win_by_mate_str(game_list, 'both')
-
-    write_out_file('/home/pi/python/chess', 'white-mates.pgn', str_white)
-    write_out_file('/home/pi/python/chess', 'black-mates.pgn', str_black)
-    write_out_file('/home/pi/python/chess', 'all-mates.pgn', str_both)
 
 
 if __name__ == "__main__":
