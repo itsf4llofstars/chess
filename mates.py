@@ -103,7 +103,7 @@ def win_by_mate(games, color='white'):
     for game in games:
         if mate_regex.search(game):
             wins_mate.append(game)
-    return white_mate
+    return wins_mate
 
 
 def white_mates_str(games) -> str:
@@ -147,6 +147,12 @@ def black_mates_str(games) -> str:
 def main():
     """main"""
     game_list = read_in_file("/home/pi/python/chess/", "all-mates2.txt")
+    white = win_by_mate(game_list)
+    black = win_by_mate(game_list, 'black')
+    all_games = win_by_mate(game_list, 'all')
+    both = win_by_mate(game_list, 'both')
+
+    [print(game) for game in both]
 
 
 if __name__ == "__main__":
