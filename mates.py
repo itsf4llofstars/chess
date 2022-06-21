@@ -30,8 +30,8 @@ def read_in_file(path: str, filename: str, mode: str = "r"):
         file_text list[str]: The read in data with each index being a line
                              of text.
     """
-    if not path.startswith("/") or not path.endswith("/"):
-        print("Forward slashed needed")
+    if not path.startswith("/"):
+        print("Leading forward slashed needed")
         sys.exit()
 
     path_name: str = os.path.join(path, filename)
