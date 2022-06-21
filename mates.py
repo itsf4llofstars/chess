@@ -79,7 +79,8 @@ def write_out_file(path: str, filename: str, file_text: str, mode: str = "w") ->
         log.error(f"Unknown error: {e}")
 
 
-def white_mates(games):
+def win_by_mate(games, color='white'):
+    # TODO: Change doc
     """Interates through games list searching for games won by white with
     a checkmate and returns those games as a list. Games in games list must
     be on one line.
@@ -90,31 +91,19 @@ def white_mates(games):
     Return:
         white_mate list[str]: List of strings containig checkmates by white.
     """
-    white_mate = []
-    mate_regex = re.compile(r"#\s1-0")
+    wins_mate = []
+    if color == 'white':
+        mate_regex = re.compile(r"#\s1-0")
+    elif color == 'black':
+        mate_regex = re.compile(r"#\s0-1")
+    elif color == 'both' or color == 'all':
+        mate_regex = re.compile(r"#\s[0-1]-[0-1]")
+    else:
+        print('ERROR: mates.py (1)')
     for game in games:
         if mate_regex.search(game):
-            white_mate.append(game)
+            wins_mate.append(game)
     return white_mate
-
-
-def black_mates(games):
-    """Interates through games list searching for games won by black with
-    a checkmate and returns those games as a list. Games in games list must
-    be on one line.
-
-    Attributes:
-        games list[str]: List of chess games.
-
-    Return:
-        black_mate list[str]: List of strings containig checkmates by black.
-    """
-    black_mate = []
-    mate_regex = re.compile(r"\d{2}\.\s.+\s.+#\s0-1")
-    for game in games:
-        if re.search(mate_regex, game):
-            black_mate.append(game)
-    return black_mate
 
 
 def white_mates_str(games) -> str:
@@ -158,9 +147,6 @@ def black_mates_str(games) -> str:
 def main():
     """main"""
     game_list = read_in_file("/home/pi/python/chess/", "all-mates2.txt")
-    white_mate = white_mates(game_list)
-    print(white_mate)
-    [print(game) for game in white_mate]
 
 
 if __name__ == "__main__":
