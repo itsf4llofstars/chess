@@ -51,7 +51,8 @@ def read_in_file(path: str, filename: str, mode: str = "r"):
     return
 
 
-def write_out_file(path: str, filename: str, file_text: str, mode: str = "w") -> None:
+def write_out_file(path: str, filename: str, file_text: str) -> None:
+    # TODO: DO NOT PASS A LIST TO THIS FUNCTION
     """Writes the passed text, 'file_text', to a file in 'path' under the name
     'filename'. Passing 'a' as mode will append instead of write/re-write.
 
@@ -67,13 +68,13 @@ def write_out_file(path: str, filename: str, file_text: str, mode: str = "w") ->
     Return:
         N/A
     """
-    if not path.startswith("/") or not path.endswith("/"):
+    if not path.startswith("/"):
         os.system("clear")
-        print("\nFront and trailing forward slashes are needed.\n")
+        print("\nLeading forward slashe are needed.\n")
         sys.exit()
     path_name = os.path.join(path, filename)
     try:
-        with open(path_name, mode) as fo:
+        with open(path_name, 'w') as fo:
             fo.write(file_text)
     except Exception as e:
         log.error(f"Unknown error: {e}")
@@ -108,6 +109,7 @@ def win_by_mate(games, color='white'):
 
 
 def win_by_mate_str(games, color='white') -> str:
+    # TODO: Change doc
     """Interates through games list searching for games won by white with
     a checkmate and returns those games as a string. Games in games list must
     be on one line.
@@ -138,18 +140,15 @@ def win_by_mate_str(games, color='white') -> str:
 def main():
     """main"""
     game_list = read_in_file("/home/pi/python/chess/", "all-mates2.txt")
-
     white = win_by_mate(game_list)
     black = win_by_mate(game_list, 'black')
     all_games = win_by_mate(game_list, 'all')
     both = win_by_mate(game_list, 'both')
-
     str_white = win_by_mate_str(game_list)
     str_black = win_by_mate_str(game_list, 'black')
     str_all = win_by_mate_str(game_list, 'all')
     str_both = win_by_mate_str(game_list, 'both')
-
-
+    write_out_file('/home/pi/python/chess', 'bacon.txt', str_both)
 
 if __name__ == "__main__":
     os.system("clear")
