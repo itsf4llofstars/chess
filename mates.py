@@ -140,15 +140,21 @@ def win_by_mate_str(games, color='white') -> str:
 def main():
     """main"""
     game_list = read_in_file("/home/pi/python/chess/", "all-mates2.txt")
+
     white = win_by_mate(game_list)
     black = win_by_mate(game_list, 'black')
     all_games = win_by_mate(game_list, 'all')
     both = win_by_mate(game_list, 'both')
+
     str_white = win_by_mate_str(game_list)
     str_black = win_by_mate_str(game_list, 'black')
     str_all = win_by_mate_str(game_list, 'all')
     str_both = win_by_mate_str(game_list, 'both')
-    write_out_file('/home/pi/python/chess', 'bacon.txt', str_both)
+
+    write_out_file('/home/pi/python/chess', 'white-mates.pgn', white-mates.pgn)
+    write_out_file('/home/pi/python/chess', 'black-mates.pgn', black-mates.pgn)
+    write_out_file('/home/pi/python/chess', 'all-mates.pgn', all-mates.pgn)
+
 
 if __name__ == "__main__":
     os.system("clear")
