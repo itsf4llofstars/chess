@@ -143,17 +143,15 @@ def main():
 
     white = win_by_mate(game_list)
     black = win_by_mate(game_list, 'black')
-    all_games = win_by_mate(game_list, 'all')
     both = win_by_mate(game_list, 'both')
 
     str_white = win_by_mate_str(game_list)
     str_black = win_by_mate_str(game_list, 'black')
-    str_all = win_by_mate_str(game_list, 'all')
     str_both = win_by_mate_str(game_list, 'both')
 
-    write_out_file('/home/pi/python/chess', 'white-mates.pgn', white-mates.pgn)
-    write_out_file('/home/pi/python/chess', 'black-mates.pgn', black-mates.pgn)
-    write_out_file('/home/pi/python/chess', 'all-mates.pgn', all-mates.pgn)
+    write_out_file('/home/pi/python/chess', 'white-mates.pgn', str_white)
+    write_out_file('/home/pi/python/chess', 'black-mates.pgn', str_black)
+    write_out_file('/home/pi/python/chess', 'all-mates.pgn', str_both)
 
 
 if __name__ == "__main__":
