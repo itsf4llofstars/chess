@@ -65,6 +65,7 @@ def normalize_games(games):
     for game in games:
         ...
 
+
 def write_games(filename, games):
     try:
         with open(filename, 'w') as write:
@@ -74,6 +75,15 @@ def write_games(filename, games):
             write.write('\n')
     except Exception as e:
         log.error(f'write_games(): UNK: {e}')
+
+
+def remove_long_games(chess_games):
+    long_games = re.compile(r'\s[4-9]\d\.\s')
+    short_games = []
+    for game in chess_games:
+        if re.search(long_games, game):
+            short_games.append(game)
+    return short_games
 
 
 def wins_list(games, winning_games, white=True) -> None:
@@ -161,7 +171,6 @@ def main() -> None:
     pgn_text = read_file(full_path)
     pgn_new_text = strip_new_lines(pgn_text)
     bumper_games = get_games(pgn_new_text)
-    write_games('/home/pi/chess/bumpers-games.pgn', bumper_games)
 
 
 if __name__ == "__main__":
