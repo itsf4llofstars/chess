@@ -9,6 +9,7 @@ pyvenv.cfg
 *.txt
 .vscode/
 vscode/
+.vscode/
 audio/
 *.tar
 *.mp3
