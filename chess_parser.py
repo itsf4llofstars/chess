@@ -54,9 +54,7 @@ def get_games(games):
     space at end of the line (game)."""
     regex_game = r"^[1]\."
     only_games = []
-    for game in games:
-        if re.search(regex_game, game):
-            only_games.append(game)
+    [only_games.append(game) for game in games if re.search(regex_game, game)]
     return only_games
 
 
