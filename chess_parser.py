@@ -116,7 +116,7 @@ def mate_list(games, white=True) -> None:
         mate_regex = re.compile(r"#\s0-1")
 
     mates = []
-    [mates.append(game) for game in games if re.seach(mate_regex, game)]
+    [mates.append(game) for game in games if re.search(mate_regex, game)]
     return mates
 
 
