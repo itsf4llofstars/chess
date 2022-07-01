@@ -88,15 +88,15 @@ def remove_long_games(chess_games, n=4):
     return short_games
 
 
-def wins_list(games, winning_games, white=True) -> None:
+def wins_list(games, white=True) -> None:
     """DOC"""
     wins_regex = re.compile(r"1-0$")
     if not white:
         wins_regex = re.compile(r"0-1$")
 
-    for game in games:
-        if re.search(wins_regex, game):
-            winning_games.append(game)
+    wins = []
+    [wins.append(game) for game in games if re.search(wins_regex, game)]
+    return wins
 
 
 def wins_str(games, white=True) -> str:
