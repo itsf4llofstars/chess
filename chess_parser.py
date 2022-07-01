@@ -147,9 +147,11 @@ def all_mates_list(games, mates) -> None:
     # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
     mate_regex = re.compile(r"#\s[0-1]-[0-1]")
 
+    mates = []
     for game in games:
         if re.search(mate_regex, game):
             mates.append(game)
+    return mates
 
 
 def all_mates_str(games) -> str:
@@ -183,7 +185,12 @@ def main() -> None:
     bumper_games = get_games(pgn_new_text)
     shortened_games = remove_long_games(bumper_games)
     white_mates = mate_list(shortened_games)
+    black_mates = mate_list(shortened_games, False)
+    all_checkmates = all_mates_list(shortened_games)
     [print(game) for game in white_mates]
+    input()
+    [print(game) for game in black_mates]
+    
 
 
 if __name__ == "__main__":
