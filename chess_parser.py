@@ -18,8 +18,8 @@ import logger as log
 
 def create_full_path(path, filename) -> str:
     """DOC"""
-    # Path string should start with / and not end with /
-    if not path.startswith("/") or path.endswith("/"):
+    # Path string should start with /
+    if not path.startswith("/"):
         log.error("create_full_path(): Leading path slashes missing.")
         print("Exiting; See chess.log")
         sys.exit()
@@ -65,6 +65,7 @@ def normalize_games(games):
     for game in games:
         ...
 
+
 def write_games(filename, games):
     try:
         with open(filename, 'w') as write:
@@ -74,8 +75,17 @@ def write_games(filename, games):
             write.write('\n')
     except Exception as e:
         log.error(f'write_games(): UNK: {e}')
-    finally:
-        log.info('write_games(): called')
+
+
+def remove_long_games(chess_games, n=4):
+    """DOC"""
+    long_games = re.compile(rf'\s[{n}-9]\d\.\s')
+    short_games = []
+    for game in chess_games:
+        if re.search(long_games, game):
+            continue
+        short_games.append(game)
+    return short_games
 
 
 def wins_list(games, winning_games, white=True) -> None:
@@ -102,22 +112,29 @@ def wins_str(games, white=True) -> str:
     return winning_str
 
 
-def mate_list(games, mates, white=True) -> None:
+def mate_list(games, white=True) -> None:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    # Can be used since we have rmoved long games
+    mate_regex = re.compile(r'#\s1-0')
     if not white:
-        mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        mate_regex = re.compile(r'#\s0-1')
 
+    mates = []
     for game in games:
         if re.search(mate_regex, game):
             mates.append(game)
+    return mates
 
 
 def mate_str(games, white=True) -> str:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    mate_regex = re.compile(r'#\s1-0')
     if not white:
-        mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        mate_regex = re.compile(r'#\s0-1')
 
     mates = ""
     for game in games:
@@ -126,18 +143,22 @@ def mate_str(games, white=True) -> str:
     return mates
 
 
-def all_mates_list(games, mates) -> None:
+def all_mates_list(games) -> None:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
+    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
+    mate_regex = re.compile(r"#\s[0-1]-[0-1]")
 
+    mates = []
     for game in games:
         if re.search(mate_regex, game):
             mates.append(game)
+    return mates
 
 
 def all_mates_str(games) -> str:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
+    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
+    mate_regex = re.compile(r"#\s[0-1]-[0-1]")
 
     mates = ""
     for game in games:
@@ -159,35 +180,21 @@ def openings(opening, games):
 
 def main() -> None:
     """main"""
-    full_path = create_full_path("/home/pi/python/chess", "all-mates.pgn")
-    pgn_games = read_file(full_path)
-    stripped_games = strip_new_lines(pgn_games)
-    only_the_games = get_games(stripped_games)
-    wins = []
-    wins_list(only_the_games, wins)
-    wins_list(only_the_games, wins, False)
-    mate_list(only_the_games, wins)
-    mate_list(only_the_games, wins, False)
-    all_mates_list(only_the_games, wins)
+    full_path = create_full_path('/home/pi/chess', 'bumper.pgn')
+    pgn_text = read_file(full_path)
+    pgn_new_text = strip_new_lines(pgn_text)
+    bumper_games = get_games(pgn_new_text)
+    shortened_games = remove_long_games(bumper_games)
+    white_mates = mate_list(shortened_games)
+    black_mates = mate_list(shortened_games, False)
+    all_checkmates = all_mates_list(shortened_games)
 
-    wins_string = wins_str(only_the_games)
-    wins_string = wins_str(only_the_games, False)
-    wins_string = mate_str(only_the_games)
-    wins_string = mate_str(only_the_games, False)
-    wins_string = all_mates_str(only_the_games)
-
-    game = ["1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 c3", "1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5 c3"]
-
-    ruy_lopez = r"1. e4 e5 2. Nf3 Nc6 3. Bb5"
-    italian = r"1. e4 e5 2. Nf3 Nc6 3. Bc4"
-
-    ruy = openings(ruy_lopez, game)
-    print(ruy)
-
-    game = [r"1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 c3", r"1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5 c3"]
-    italy = openings(italian, game)
-    print(italy)
+    [print(game) for game in white_mates]
+    input()
+    [print(game) for game in black_mates]
+    input()
+    [print(game) for game in all_checkmates]
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
