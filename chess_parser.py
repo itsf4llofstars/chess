@@ -77,12 +77,14 @@ def write_games(filename, games):
         log.error(f'write_games(): UNK: {e}')
 
 
-def remove_long_games(chess_games):
-    long_games = re.compile(r'\s[4-9]\d\.\s')
+def remove_long_games(chess_games, n=3):
+    """doc"""
+    long_games = re.compile(rf'\s[{n}-9]\d\.\s')
     short_games = []
     for game in chess_games:
         if re.search(long_games, game):
-            short_games.append(game)
+            continue
+        short_games.append(game)
     return short_games
 
 
@@ -171,6 +173,9 @@ def main() -> None:
     pgn_text = read_file(full_path)
     pgn_new_text = strip_new_lines(pgn_text)
     bumper_games = get_games(pgn_new_text)
+    shortened_games = remove_long_games(bumper_games)
+    [print(game) for game in shortened_games]
+
 
 
 if __name__ == "__main__":
