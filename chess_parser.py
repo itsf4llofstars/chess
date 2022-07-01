@@ -142,7 +142,7 @@ def mate_str(games, white=True) -> str:
     return mates
 
 
-def all_mates_list(games, mates) -> None:
+def all_mates_list(games) -> None:
     """DOC"""
     # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
     mate_regex = re.compile(r"#\s[0-1]-[0-1]")
@@ -190,7 +190,8 @@ def main() -> None:
     [print(game) for game in white_mates]
     input()
     [print(game) for game in black_mates]
-    
+    input()
+    [print(game) for game in all_checkmates]
 
 
 if __name__ == "__main__":
