@@ -157,34 +157,11 @@ def openings(opening, games):
 
 def main() -> None:
     """main"""
-    full_path = create_full_path("/home/pi/python/chess", "all-mates.pgn")
-    pgn_games = read_file(full_path)
-    stripped_games = strip_new_lines(pgn_games)
-    only_the_games = get_games(stripped_games)
-    wins = []
-    wins_list(only_the_games, wins)
-    wins_list(only_the_games, wins, False)
-    mate_list(only_the_games, wins)
-    mate_list(only_the_games, wins, False)
-    all_mates_list(only_the_games, wins)
-
-    wins_string = wins_str(only_the_games)
-    wins_string = wins_str(only_the_games, False)
-    wins_string = mate_str(only_the_games)
-    wins_string = mate_str(only_the_games, False)
-    wins_string = all_mates_str(only_the_games)
-
-    game = ["1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 c3", "1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5 c3"]
-
-    ruy_lopez = r"1. e4 e5 2. Nf3 Nc6 3. Bb5"
-    italian = r"1. e4 e5 2. Nf3 Nc6 3. Bc4"
-
-    ruy = openings(ruy_lopez, game)
-    print(ruy)
-
-    game = [r"1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 c3", r"1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5 c3"]
-    italy = openings(italian, game)
-    print(italy)
+    full_path = create_full_path('/home/pi/chess', 'bumper.pgn')
+    pgn_text = read_file(full_path)
+    pgn_new_text = strip_new_lines(pgn_text)
+    bumper_games = get_games(pgn_new_text)
+    write_games('/home/pi/chess/bumpers-games.pgn', bumper_games)
 
 
 if __name__ == "__main__":
