@@ -114,17 +114,12 @@ def wins_str(games, white=True) -> str:
 
 def mate_list(games, white=True) -> None:
     """DOC"""
-    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
-    # Can be used since we have rmoved long games
     mate_regex = re.compile(r'#\s1-0')
     if not white:
-        # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
         mate_regex = re.compile(r'#\s0-1')
 
     mates = []
-    for game in games:
-        if re.search(mate_regex, game):
-            mates.append(game)
+    [mates.append(game) for game in games if re.seach(mate_regex, game)]
     return mates
 
 
