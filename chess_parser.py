@@ -43,9 +43,7 @@ def read_file(path):
 def strip_new_lines(text_lines):
     """DOC"""
     no_newlines = []
-    # [no_newlines.append(line[:-1]) for line in text_line]
-    for line in text_lines:
-        no_newlines.append(line[:-1])
+    [no_newlines.append(line.strip()) for line in text_lines]
     return no_newlines
 
 
@@ -54,9 +52,7 @@ def get_games(games):
     space at end of the line (game)."""
     regex_game = r"^[1]\."
     only_games = []
-    for game in games:
-        if re.search(regex_game, game):
-            only_games.append(game)
+    [only_games.append(game) for game in games if re.search(regex_game, game)]
     return only_games
 
 
@@ -68,35 +64,36 @@ def normalize_games(games):
 
 def write_games(filename, games):
     try:
-        with open(filename, 'w') as write:
+        with open(filename, "w") as write:
             for line in games:
                 write.write(line)
-                write.write(' ')
-            write.write('\n')
+                write.write(" ")
+            write.write("\n")
     except Exception as e:
-        log.error(f'write_games(): UNK: {e}')
+        log.error(f"write_games(): UNK: {e}")
 
 
 def remove_long_games(chess_games, n=4):
     """DOC"""
-    long_games = re.compile(rf'\s[{n}-9]\d\.\s')
+    long_games = re.compile(rf"\s[{n}-9]\d\.\s")
     short_games = []
-    for game in chess_games:
-        if re.search(long_games, game):
-            continue
+    [
         short_games.append(game)
+        for game in chess_games
+        if not re.search(long_games, game)
+    ]
     return short_games
 
 
-def wins_list(games, winning_games, white=True) -> None:
+def wins_list(games, white=True) -> None:
     """DOC"""
     wins_regex = re.compile(r"1-0$")
     if not white:
         wins_regex = re.compile(r"0-1$")
 
-    for game in games:
-        if re.search(wins_regex, game):
-            winning_games.append(game)
+    wins = []
+    [wins.append(game) for game in games if re.search(wins_regex, game)]
+    return wins
 
 
 def wins_str(games, white=True) -> str:
@@ -114,27 +111,22 @@ def wins_str(games, white=True) -> str:
 
 def mate_list(games, white=True) -> None:
     """DOC"""
-    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
-    # Can be used since we have rmoved long games
-    mate_regex = re.compile(r'#\s1-0')
+    mate_regex = re.compile(r"#\s1-0")
     if not white:
-        # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
-        mate_regex = re.compile(r'#\s0-1')
+        mate_regex = re.compile(r"#\s0-1")
 
     mates = []
-    for game in games:
-        if re.search(mate_regex, game):
-            mates.append(game)
+    [mates.append(game) for game in games if re.search(mate_regex, game)]
     return mates
 
 
 def mate_str(games, white=True) -> str:
     """DOC"""
     # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
-    mate_regex = re.compile(r'#\s1-0')
+    mate_regex = re.compile(r"#\s1-0")
     if not white:
         # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
-        mate_regex = re.compile(r'#\s0-1')
+        mate_regex = re.compile(r"#\s0-1")
 
     mates = ""
     for game in games:
@@ -145,13 +137,9 @@ def mate_str(games, white=True) -> str:
 
 def all_mates_list(games) -> None:
     """DOC"""
-    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
     mate_regex = re.compile(r"#\s[0-1]-[0-1]")
-
     mates = []
-    for game in games:
-        if re.search(mate_regex, game):
-            mates.append(game)
+    [mates.append(game) for game in games if re.search(mate_regex, game)]
     return mates
 
 
@@ -180,14 +168,22 @@ def openings(opening, games):
 
 def main() -> None:
     """main"""
-    full_path = create_full_path('/home/pi/chess', 'bumper.pgn')
+    full_path = create_full_path("/home/pi/chess", "bumper.pgn")
     pgn_text = read_file(full_path)
+    del full_path
+
     pgn_new_text = strip_new_lines(pgn_text)
+    del pgn_text
+
     bumper_games = get_games(pgn_new_text)
+    del pgn_new_text
+
     shortened_games = remove_long_games(bumper_games)
+
     white_mates = mate_list(shortened_games)
     black_mates = mate_list(shortened_games, False)
     all_checkmates = all_mates_list(shortened_games)
+    del shortened_games
 
     [print(game) for game in white_mates]
     input()
