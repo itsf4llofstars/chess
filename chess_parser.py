@@ -129,9 +129,11 @@ def mate_list(games, white=True) -> None:
 
 def mate_str(games, white=True) -> str:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    mate_regex = re.compile(r'#\s1-0')
     if not white:
-        mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        mate_regex = re.compile(r'#\s0-1')
 
     mates = ""
     for game in games:
