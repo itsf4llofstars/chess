@@ -77,8 +77,8 @@ def write_games(filename, games):
         log.error(f'write_games(): UNK: {e}')
 
 
-def remove_long_games(chess_games, n=3):
-    """doc"""
+def remove_long_games(chess_games, n=4):
+    """DOC"""
     long_games = re.compile(rf'\s[{n}-9]\d\.\s')
     short_games = []
     for game in chess_games:
@@ -112,16 +112,20 @@ def wins_str(games, white=True) -> str:
     return winning_str
 
 
-def mate_list(games, mates, white=True) -> None:
+def mate_list(games, white=True) -> None:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s1-0")
+    # Can be used since we have rmoved long games
+    mate_regex = re.compile(r'#\s1-0')
     if not white:
-        mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s0-1")
+        mate_ragex = re.compile(r'#\s0-1')
 
+    mates = []
     for game in games:
         if re.search(mate_regex, game):
             mates.append(game)
-
+    return mates
 
 def mate_str(games, white=True) -> str:
     """DOC"""
@@ -174,9 +178,9 @@ def main() -> None:
     pgn_new_text = strip_new_lines(pgn_text)
     bumper_games = get_games(pgn_new_text)
     shortened_games = remove_long_games(bumper_games)
-    [print(game) for game in shortened_games]
-
+    white_mates = mate_list(shortened_games)
+    [print(game) for game in white_mates]
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
