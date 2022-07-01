@@ -144,7 +144,8 @@ def mate_str(games, white=True) -> str:
 
 def all_mates_list(games, mates) -> None:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
+    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
+    mate_regex = re.compile(r"#\s[0-1]-[0-1]")
 
     for game in games:
         if re.search(mate_regex, game):
@@ -153,7 +154,8 @@ def all_mates_list(games, mates) -> None:
 
 def all_mates_str(games) -> str:
     """DOC"""
-    mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
+    # mate_regex = re.compile(r"[1-4]\d\.\s.+#\s[0-1]-[0-1]")
+    mate_regex = re.compile(r"#\s[0-1]-[0-1]")
 
     mates = ""
     for game in games:
