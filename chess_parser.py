@@ -43,9 +43,7 @@ def read_file(path):
 def strip_new_lines(text_lines):
     """DOC"""
     no_newlines = []
-    # [no_newlines.append(line[:-1]) for line in text_line]
-    for line in text_lines:
-        no_newlines.append(line[:-1])
+    [no_newlines.append(line.strip()) for line in text_lines]
     return no_newlines
 
 
