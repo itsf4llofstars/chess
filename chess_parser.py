@@ -81,10 +81,11 @@ def remove_long_games(chess_games, n=4):
     """DOC"""
     long_games = re.compile(rf'\s[{n}-9]\d\.\s')
     short_games = []
-    for game in chess_games:
-        if re.search(long_games, game):
-            continue
-        short_games.append(game)
+    # for game in chess_games:
+    #     if re.search(long_games, game):
+    #         continue
+    #     short_games.append(game)
+    [short_games.append(game) for game in chess_games if not re.search(long_games, game)]
     return short_games
 
 
