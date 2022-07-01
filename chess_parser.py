@@ -74,8 +74,6 @@ def write_games(filename, games):
             write.write('\n')
     except Exception as e:
         log.error(f'write_games(): UNK: {e}')
-    finally:
-        log.info('write_games(): called')
 
 
 def wins_list(games, winning_games, white=True) -> None:
