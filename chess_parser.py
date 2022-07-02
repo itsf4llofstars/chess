@@ -20,9 +20,7 @@ def create_full_path(path, filename) -> str:
     """DOC"""
     # Path string should start with /
     if not path.startswith("/"):
-        log.error("create_full_path(): Leading path slashes missing.")
-        print("Exiting; See chess.log")
-        sys.exit()
+        path = '/' + path
 
     return os.path.join(path, filename)
 
