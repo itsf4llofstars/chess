@@ -1,11 +1,11 @@
-# chess
-Finds chess games according to moves using python regex
+#chess
 
-This main.py file parses a user given file name and extracts only those games which
-start as The Italian opening. It is currently only able to parse a certain format of
-pgn games, those that have the move number with no space between the moving piece.
+Parses chess games from a pgn file and whites only those games the user wants<br>
+to a text file.<br>
 
-1.e4 e5 2.Nf3 Nc6 3.Bc4
+## Notes
 
-One can commint in or out whether they want the Evan's gambit or not.
-
+TODO:
+- Set up as Python package structure
+- Re-doc mates.py
+- Re-variable mates.py
