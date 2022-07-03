@@ -24,9 +24,12 @@ def main():
     black_mates = f.mate_list(pgn_short_games, False)
     del pgn_short_games
 
-    [print(game) for game in white_mates]
-    input('Continue.. ')
-    [print(game) for game in black_mates]
+    # [print(game) for game in white_mates]
+    # input('Continue.. ')
+    # [print(game) for game in black_mates]
+
+    f.write_games('/home/pi/chess/white_mates.txt', white_mates)
+    f.write_games('/home/pi/chess/black_mates.txt', black_mates)
 
 
 if __name__ == "__main__":
