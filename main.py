@@ -1,29 +1,38 @@
 #!/usr/bin/env python3
 """main.py file for parsing chess data"""
-import chessfunctions as cf
-
-user_path = cf.get_path()
-user_file = cf.get_filename()
-
-path_file = cf.create_full_path(user_path, user_file)  # Works
-games_file = cf.read_file(path_file)  # Works
-cleaned_games = cf.strip_new_lines(games_file)  # Works
-just_games = cf.get_games(cleaned_games)  # Works
-
-white_mates = []
-cf.wins_list(just_games, white_mates)
-
-for game in white_mates:
-    print(game)
-
-print()
-
-black_mates = []
-cf.wins_list(just_games, black_mates, False)
-
-for game in black_mates:
-    print(game)
+import chess_parser as f
 
 
-print(len(white_mates))
-print(len(black_mates))
+def main():
+    pgn_path = '/home/pi/chess/'
+    pgn_filename = 'bumper.pgn'
+
+    full_path = f.create_full_path(pgn_path, pgn_filename)
+    pgn_lines = f.read_file(full_path)
+    del full_path
+
+    pgn_new_lines = f.strip_new_lines(pgn_lines)
+    del pgn_lines
+
+    pgn_games = f.get_games(pgn_new_lines)
+    del pgn_new_lines
+
+    pgn_short_games = f.remove_long_games(pgn_games)
+    del pgn_games
+
+    white_mates = f.mate_list(pgn_short_games)
+    black_mates = f.mate_list(pgn_short_games, False)
+    del pgn_short_games
+
+    # [print(game) for game in white_mates]
+    # input('Continue.. ')
+    # [print(game) for game in black_mates]
+
+    f.write_games('/home/pi/chess/white_mates.txt', white_mates)
+    f.write_games('/home/pi/chess/black_mates.txt', black_mates)
+
+
+if __name__ == "__main__":
+    import sys
+
+    sys.exit(main())

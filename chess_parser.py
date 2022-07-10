@@ -20,9 +20,7 @@ def create_full_path(path, filename) -> str:
     """DOC"""
     # Path string should start with /
     if not path.startswith("/"):
-        log.error("create_full_path(): Leading path slashes missing.")
-        print("Exiting; See chess.log")
-        sys.exit()
+        path = '/' + path
 
     return os.path.join(path, filename)
 
@@ -67,7 +65,7 @@ def write_games(filename, games):
         with open(filename, "w") as write:
             for line in games:
                 write.write(line)
-                write.write(" ")
+                write.write("\n")
             write.write("\n")
     except Exception as e:
         log.error(f"write_games(): UNK: {e}")
